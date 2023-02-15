@@ -1,0 +1,34 @@
+# Configure asset models
+asset_models:
+- name: 'Enterprise'
+  child: 'Site'
+- name: 'Site'
+  child: 'Area'
+- name: 'Area'
+  child: 'Production Line'
+- name: 'Production Line'
+  child: 'Stamping Press'
+- name: 'Stamping Press'
+  child: 
+
+# Configure assets
+assets:
+  - name: 'Octank Motor'
+    model: 'Enterprise'
+    associated_assets:
+    - 'Arlington'
+  - name: 'Arlington'
+    model: 'Site'
+    associated_assets:
+    - 'Stamping'
+  - name: 'Stamping'
+    model: 'Area'
+    associated_assets:
+    - 'Line 1'
+  - name: 'Line 1'
+    model: 'Production Line'
+    associated_assets:
+    - 'Stamping Press A'
+  - name: 'Stamping Press A'
+    model: 'Stamping Press'
+    associated_assets:

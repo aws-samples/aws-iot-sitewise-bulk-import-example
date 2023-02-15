@@ -1,0 +1,16 @@
+# Configure import job
+job:
+  role_arn: 'arn:aws:iam::272786750436:role/SiteWiseBulkImportRole'
+  error_bucket: 'sitewise-bulk-import-data'
+  error_prefix: 'errors/'
+data:
+  bucket: 'sitewise-bulk-import-data'
+  key: 'data/bulk_import_historical.csv'
+  column_names:
+  - ASSET_ID
+  - PROPERTY_ID
+  - DATA_TYPE
+  - TIMESTAMP_SECONDS
+  - TIMESTAMP_NANO_OFFSET
+  - QUALITY
+  - VALUE
