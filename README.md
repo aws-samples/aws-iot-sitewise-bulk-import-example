@@ -1,7 +1,7 @@
 # IoT SiteWise Bulk Import Example
 
 ## About this Repo
-This repo provides code samples to test IoT SiteWise BulkImportJob API. Use this repo, you can easily create a sample asset hiearchy for an automobile manufacturer and then simulate historical data for a selected period of time.
+This repo provides code samples to test the IoT SiteWise BulkImportJob API. Using this repo, you can easily create a sample asset hiearchy for an automobile manufacturer, simulate historical data for a selected period of time, and then import the data into AWS IoT SiteWise.
 
 ## How to use
 ### 1) Configure
