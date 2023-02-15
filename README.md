@@ -1,4 +1,4 @@
-# IoT SiteWise Bulk Import Example
+# AWS IoT SiteWise Bulk Import Example
 
 ## About this Repo
 This repo provides code samples to test the IoT SiteWise BulkImportJob API. Using this repo, you can easily create a sample asset hiearchy for an automobile manufacturer, simulate historical data for a selected period of time, and then import the data into AWS IoT SiteWise.
@@ -46,16 +46,36 @@ Sample output for hierarchy definitions:
 Sample output for asset creation:
 
     Creating assets..
-            Created name: Octank Motor, id: 5dc7c166-922b-4c32-b5e8-7d15a38f4fa7
-                    status: ACTIVE
-            Created name: Arlington, id: c580e773-98ce-442d-ac84-c72fed607094
-                    status: ACTIVE
-            Created name: Stamping, id: 4f413e22-3557-47c8-9a90-339c33363900
-                    status: ACTIVE
-            Created name: Line 1, id: 548dedd4-0658-40a3-98d0-e7ff8afb3c6f
-                    status: ACTIVE
-            Created name: Stamping Press A, id: 73c3b608-7ec8-43e8-b8c2-dbc62d046e15
-                    status: ACTIVE
+        Created name: Octank Motor, id: 508d7b0a-5dca-4f11-aadc-8da47e689971
+                status: ACTIVE
+        Created name: Arlington, id: a4853fab-ac1b-4fd6-a9ab-070f108addf2
+                status: ACTIVE
+        Created name: Chicago, id: 65241b35-5eef-4512-b43b-0fb720c73a27
+                status: ACTIVE
+        Created name: Georgetown, id: 42be3ef5-814b-4504-837e-26ccfc2f5efe
+                status: ACTIVE
+        Created name: Indianapolis, id: 3d84a03b-690d-4cee-8699-a82012838498
+                status: ACTIVE
+        Created name: Stamping, id: 07ed3cdc-11c2-4b7f-8919-d8d4778c0bdd
+                status: ACTIVE
+        Created name: Welding, id: a05958a3-bd41-4dae-880b-8d8ee83bf271
+                status: ACTIVE
+        Created name: Painting, id: d796f2b5-95f3-45b7-8ab4-444cf743518e
+                status: ACTIVE
+        Created name: Powertrain, id: 66e48fb0-6bf9-4027-b61d-2a891a7c4d50
+                status: ACTIVE
+        Created name: Line 1, id: f62b5401-1e38-43c3-b156-16b2588e71ec
+                status: ACTIVE
+        Created name: Line 2, id: a14a1e24-7abe-4e3e-9960-210badeb4047
+                status: ACTIVE
+        Created name: Stamping Press A, id: 55254f01-4d9b-40b6-9347-635ffc6ec9c5
+                status: ACTIVE
+        Created name: Stamping Press B, id: ae9cb134-bbeb-412b-82fb-2a49a0e3b91f
+                status: ACTIVE
+        Created name: Stamping Press C, id: 0540d862-f8d7-4a3f-8710-e1b0f823f03e
+                status: ACTIVE
+        Created name: Stamping Press D, id: 17b306f4-77b2-47df-a0dd-22d7ca1de04c
+                status: ACTIVE
     All assets created!
 
 Sample output for asset associations:
@@ -71,7 +91,7 @@ Run `simulate_historical_data.py` to generate simulated historical data for the 
 Sample output:
 
     Retrieving list of configured asset properties..
-    Retrieved asset properties: 2
+    Retrieved asset properties: 8
     Generating simulated data between 2022-01-01 and 2022-12-31..
     Data generation complete!
    

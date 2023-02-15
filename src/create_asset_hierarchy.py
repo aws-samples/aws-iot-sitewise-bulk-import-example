@@ -168,7 +168,6 @@ def create_asset_hierarchy() -> None:
     print('Updating assets with asset associations..')
     associate_assets(assets_models_config["assets"])
     print('All assets updated!')
-    print(assets_models_config)
 
 def start() -> None:
     create_asset_hierarchy() 

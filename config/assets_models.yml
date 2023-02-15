@@ -17,18 +17,58 @@ assets:
     model: 'Enterprise'
     associated_assets:
     - 'Arlington'
+    - 'Chicago'
+    - 'Georgetown'
+    - 'Indianapolis'
   - name: 'Arlington'
     model: 'Site'
     associated_assets:
     - 'Stamping'
+    - 'Welding'
+    - 'Painting'
+    - 'Powertrain'
+  - name: 'Chicago'
+    model: 'Site'
+    associated_assets:
+  - name: 'Georgetown'
+    model: 'Site'
+    associated_assets:
+  - name: 'Indianapolis'
+    model: 'Site'
+    associated_assets:
   - name: 'Stamping'
     model: 'Area'
     associated_assets:
     - 'Line 1'
+    - 'Line 2'
+  - name: 'Welding'
+    model: 'Area'
+    associated_assets:
+  - name: 'Painting'
+    model: 'Area'
+    associated_assets:
+  - name: 'Powertrain'
+    model: 'Area'
+    associated_assets:
   - name: 'Line 1'
     model: 'Production Line'
     associated_assets:
     - 'Stamping Press A'
+    - 'Stamping Press B'
+  - name: 'Line 2'
+    model: 'Production Line'
+    associated_assets:
+    - 'Stamping Press C'
+    - 'Stamping Press D'
   - name: 'Stamping Press A'
+    model: 'Stamping Press'
+    associated_assets:
+  - name: 'Stamping Press B'
+    model: 'Stamping Press'
+    associated_assets:
+  - name: 'Stamping Press C'
+    model: 'Stamping Press'
+    associated_assets:
+  - name: 'Stamping Press D'
     model: 'Stamping Press'
     associated_assets:
