@@ -113,3 +113,17 @@ Sample output.
     Created job: 8f466ae3-78d0-4f06-bf92-8cff70aee5c4
     Checking job status every 5 secs until done
     Job status: COMPLETED
+
+## Clean up
+Navigate to [AWS IoT SiteWise](https://aws.amazon.com/iotsitewise/home) and perform the following
+1.	Choose **Assets** and pick an asset
+2.	Remove all **Associated assets** from the asset, and then delete the asset
+3.	Repeat the process for all the assets
+4.	Choose **Models** and remove **Hierarchy definitions** from all the models
+5.	Delete all models
+6.	Choose **Portals** and delete the portal
+
+        
+Navigate to [Amazon S3](https://s3.console.aws.amazon.com/s3/home) and perform the following
+1.	Delete the `S3 bucket location` configured under the **Storage** section of AWS IoT SiteWise
+2.	Delete the data and error buckets configured in the `/config/bulk_import.yml` of Git repo
