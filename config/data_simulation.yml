@@ -1,15 +1,15 @@
 # Configure simulation range for each property 
 properties:
 - name: 'pressure'
-  model: 'Stamping Press'
+  model: 'Sample_Stamping Press'
   min: 60
   max: 90
 - name: 'temperature'
-  model: 'Stamping Press'
+  model: 'Sample_Stamping Press'
   min: 200
   max: 300
 
 # Configure historical date range
 date_range:
-  from: '2022-01-01'
+  from: '2022-10-01'
   to: '2022-12-31'

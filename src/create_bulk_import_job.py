@@ -7,6 +7,8 @@ import boto3
 from datetime import datetime
 import time
 
+PROFILE_NAME = 'bulkimport'
+boto3.setup_default_session(profile_name=PROFILE_NAME)
 client = boto3.client('iotsitewise')
 s3_client = boto3.client('s3')
 
@@ -19,16 +21,24 @@ data_dir = f'{root_dir}/data'
 with open(f'{config_dir}/bulk_import.yml', 'r') as file:
     bulk_import_config = yaml.safe_load(file)
 
-script_start_timestamp = int(datetime.now().timestamp())
+job_ids = []
 
-def create_job():
+def get_s3_keys():
+    response = s3_client.list_objects_v2(Bucket=bulk_import_config["data"]["bucket"], Prefix=bulk_import_config["data"]["prefix"])
+    s3_keys = []
+    if response["ResponseMetadata"]["HTTPStatusCode"] == 200:
+        content_records = response["Contents"]
+        s3_keys = [record["Key"] for record in content_records]
+    return s3_keys
+
+def create_job(s3_key):
     response = client.create_bulk_import_job(
-        jobName= str(script_start_timestamp),
+        jobName= f'job_{str(int(datetime.now().timestamp()))}',
         jobRoleArn=bulk_import_config["job"]["role_arn"],
         files=[
             {
                 'bucket': bulk_import_config["data"]["bucket"],
-                'key': bulk_import_config["data"]["key"]
+                'key': s3_key
             },
         ],
         errorReportLocation={
@@ -45,30 +55,50 @@ def create_job():
     )
     return response
 
+def create_jobs():
+    s3_keys = get_s3_keys()
+    print(f'Total S3 objects: {len(s3_keys)}')
+    if len(s3_keys) > 0: 
+        print(f'Number of bulk import jobs to create: {len(s3_keys)}')
+    else:
+        print('No data found in S3!')
+
+    for s3_key in s3_keys:
+        job_id = create_job(s3_key)['jobId']
+        print(f'\tCreated job: {job_id} for importing data from {s3_key} S3 object')
+        job_ids.append(job_id)
+        time.sleep(1)
+
 def list_bulk_import_jobs():
     response = client.list_bulk_import_jobs(
         maxResults=100
     )
     return response
 
-def job_status(job_id):
+def job_status(job_id) -> str:
     status = None
     for job in list_bulk_import_jobs()["jobSummaries"]:
         if job['id'] == job_id: status = job["status"] 
     return status
 
-def start() -> None:
-    job_id = create_job()['jobId']
-    print(f'Created job: {job_id}')
+def check_job_status():
     SLEEP_SECS = 5
-    print(f'Checking job status every {SLEEP_SECS} secs until done..')
+    active_job_ids = job_ids.copy()
+    print(f'Checking job status every {SLEEP_SECS} secs until completion..')
 
     while True:
-        status=job_status(job_id)
-        if status not in ['PENDING','RUNNING']:
-            print(f'Job status: {status}')
+        for job_id in active_job_ids:
+            status=job_status(job_id)
+            if status not in ['PENDING','RUNNING']:
+                print(f'\tJob id: {job_id}, status: {status}')
+                active_job_ids.remove(job_id)
+        if len(active_job_ids) == 0: 
             break
         time.sleep(SLEEP_SECS)
+
+def start() -> None:
+    create_jobs()
+    check_job_status()
 
 if __name__ == "__main__":
     start()

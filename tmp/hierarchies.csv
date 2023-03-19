@@ -1,0 +1,5 @@
+asset_model_name,child_asset_model_id,hierarchy_id
+Sample_Enterprise,ce04330f-e03a-45ca-84e4-2f4be107c2f9,7c554a5f-15b5-496c-9993-008dedb57458
+Sample_Site,0747cb17-4903-4094-a7da-51aa508525f4,dd542032-fdd6-47f3-9d3b-6b42d27c6ba5
+Sample_Area,8eeb8507-59e5-455c-9849-88dc3dac1ac3,81a5f14f-537c-40fc-a80f-b448bd83c617
+Sample_Production Line,4f7e8cf8-554f-40df-9c3b-d741d497e762,7517b392-8e81-4176-b3d9-2a75b266618e

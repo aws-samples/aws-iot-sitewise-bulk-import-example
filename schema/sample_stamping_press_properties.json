@@ -1,0 +1,30 @@
+[
+    {
+        "name": "pressure",
+        "dataType": "DOUBLE",
+        "unit": "kPa",
+        "type": {
+            "measurement": {
+                "processingConfig": {
+                    "forwardingConfig": {
+                        "state": "ENABLED"
+                    }
+                }
+            }
+        }
+    },
+    {
+        "name": "temperature",
+        "dataType": "DOUBLE",
+        "unit": "Fahrenheit",
+        "type": {
+            "measurement": {
+                "processingConfig": {
+                    "forwardingConfig": {
+                        "state": "ENABLED"
+                    }
+                }
+            }
+        }
+    }
+]

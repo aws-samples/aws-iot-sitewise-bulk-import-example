@@ -1,74 +1,78 @@
 # Configure asset models
 asset_models:
-- name: 'Enterprise'
-  child: 'Site'
-- name: 'Site'
-  child: 'Area'
-- name: 'Area'
-  child: 'Production Line'
-- name: 'Production Line'
-  child: 'Stamping Press'
-- name: 'Stamping Press'
-  child: 
+- name: 'Sample_Enterprise'
+  children:
+  - 'Sample_Site'
+- name: 'Sample_Site'
+  children:
+  - 'Sample_Area'
+- name: 'Sample_Area'
+  children: 
+  - 'Sample_Production Line'
+- name: 'Sample_Production Line'
+  children: 
+  - 'Sample_Stamping Press'
+- name: 'Sample_Stamping Press'
+  children: 
 
 # Configure assets
 assets:
-  - name: 'Octank Motor'
-    model: 'Enterprise'
+  - name: 'Sample_Octank Motor'
+    model: 'Sample_Enterprise'
     associated_assets:
-    - 'Arlington'
-    - 'Chicago'
-    - 'Georgetown'
-    - 'Indianapolis'
-  - name: 'Arlington'
-    model: 'Site'
+    - 'Sample_Arlington'
+    - 'Sample_Chicago'
+    - 'Sample_Georgetown'
+    - 'Sample_Indianapolis'
+  - name: 'Sample_Arlington'
+    model: 'Sample_Site'
     associated_assets:
-    - 'Stamping'
-    - 'Welding'
-    - 'Painting'
-    - 'Powertrain'
-  - name: 'Chicago'
-    model: 'Site'
+    - 'Sample_Stamping'
+    - 'Sample_Welding'
+    - 'Sample_Painting'
+    - 'Sample_Powertrain'
+  - name: 'Sample_Chicago'
+    model: 'Sample_Site'
     associated_assets:
-  - name: 'Georgetown'
-    model: 'Site'
+  - name: 'Sample_Georgetown'
+    model: 'Sample_Site'
     associated_assets:
-  - name: 'Indianapolis'
-    model: 'Site'
+  - name: 'Sample_Indianapolis'
+    model: 'Sample_Site'
     associated_assets:
-  - name: 'Stamping'
-    model: 'Area'
+  - name: 'Sample_Stamping'
+    model: 'Sample_Area'
     associated_assets:
-    - 'Line 1'
-    - 'Line 2'
-  - name: 'Welding'
-    model: 'Area'
+    - 'Sample_Line 1'
+    - 'Sample_Line 2'
+  - name: 'Sample_Welding'
+    model: 'Sample_Area'
     associated_assets:
-  - name: 'Painting'
-    model: 'Area'
+  - name: 'Sample_Painting'
+    model: 'Sample_Area'
     associated_assets:
-  - name: 'Powertrain'
-    model: 'Area'
+  - name: 'Sample_Powertrain'
+    model: 'Sample_Area'
     associated_assets:
-  - name: 'Line 1'
-    model: 'Production Line'
+  - name: 'Sample_Line 1'
+    model: 'Sample_Production Line'
     associated_assets:
-    - 'Stamping Press A'
-    - 'Stamping Press B'
-  - name: 'Line 2'
-    model: 'Production Line'
+    - 'Sample_Stamping Press A'
+    - 'Sample_Stamping Press B'
+  - name: 'Sample_Line 2'
+    model: 'Sample_Production Line'
     associated_assets:
-    - 'Stamping Press C'
-    - 'Stamping Press D'
-  - name: 'Stamping Press A'
-    model: 'Stamping Press'
+    - 'Sample_Stamping Press C'
+    - 'Sample_Stamping Press D'
+  - name: 'Sample_Stamping Press A'
+    model: 'Sample_Stamping Press'
     associated_assets:
-  - name: 'Stamping Press B'
-    model: 'Stamping Press'
+  - name: 'Sample_Stamping Press B'
+    model: 'Sample_Stamping Press'
     associated_assets:
-  - name: 'Stamping Press C'
-    model: 'Stamping Press'
+  - name: 'Sample_Stamping Press C'
+    model: 'Sample_Stamping Press'
     associated_assets:
-  - name: 'Stamping Press D'
-    model: 'Stamping Press'
+  - name: 'Sample_Stamping Press D'
+    model: 'Sample_Stamping Press'
     associated_assets:
