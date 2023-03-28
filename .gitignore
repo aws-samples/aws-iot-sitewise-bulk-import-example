@@ -3,3 +3,7 @@
 
 # Ignore all csv files
 .csv
+
+#Do not ignore data and tmp directories
+!data
+!tmp
