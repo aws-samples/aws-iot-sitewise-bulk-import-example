@@ -17,6 +17,9 @@ config_dir = f'{root_dir}/config'
 schema_dir = f'{root_dir}/schema'
 tmp_dir = f'{root_dir}/tmp'
 
+# Create tmp directory if doesn't exist
+if not os.path.exists(tmp_dir): os.makedirs(tmp_dir)
+
 # Load assets_models_configuration
 with open(f'{config_dir}/assets_models.yml', 'r') as file:
     assets_models_config = yaml.safe_load(file)

@@ -18,6 +18,9 @@ root_dir = os.path.abspath(os.path.dirname(dir))
 config_dir = f'{root_dir}/config'
 data_dir = f'{root_dir}/data'
 
+# Create data directory if doesn't exist
+if not os.path.exists(data_dir): os.makedirs(data_dir)
+
 # Load assets_models_configuration
 with open(f'{config_dir}/assets_models.yml', 'r') as file:
     assets_models_config = yaml.safe_load(file)
