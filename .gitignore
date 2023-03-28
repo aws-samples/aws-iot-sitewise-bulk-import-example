@@ -1,9 +1,6 @@
 # Ignore Mac system files
-.DS_store
+*.DS_store
 
-# Ignore all csv files
-.csv
-
-#Do not ignore data and tmp directories
-!data
-!tmp
+# Ignore all csv files from data and tmp directories
+data/*.csv
+tmp/*.csv
