@@ -5,10 +5,11 @@ import random
 import time
 import datetime
 import json
-import yaml
 import csv
 import os
+from typing import List, Dict
 import boto3
+import yaml
 
 PROFILE_NAME = 'default'
 boto3.setup_default_session(profile_name=PROFILE_NAME)
@@ -35,10 +36,10 @@ with open(f'{config_dir}/data_simulation.yml', 'r') as file:
     data_simulation_config = yaml.safe_load(file)
 date_range = data_simulation_config["date_range"]
 
-def print_json(dict_obj: dict) -> None:
+def print_json(dict_obj: Dict) -> None:
     print(json.dumps(dict_obj, indent=2, default=str))
 
-def get_properties_list() -> list[dict]:
+def get_properties_list() -> List[Dict]:
     properties = []
     res_models = client.list_asset_models(maxResults=100)
     models = res_models["assetModelSummaries"]
@@ -60,7 +61,7 @@ def get_properties_list() -> list[dict]:
                     properties.append({'property_id': property["id"], 'property_name': property["name"], 'asset_id': asset["id"], 'model_name': model_name})
     return properties
 
-def generate_historical_data(properties: list[dict]) -> None:
+def generate_historical_data(properties: List[Dict]) -> None:
     file_num = 0
     # Configure data range
 

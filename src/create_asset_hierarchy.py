@@ -4,9 +4,10 @@
 import time
 import json
 import csv
-import yaml
 import os
+from typing import List, Dict
 import boto3
+import yaml
 
 PROFILE_NAME = 'default'
 boto3.setup_default_session(profile_name=PROFILE_NAME)
@@ -24,10 +25,10 @@ if not os.path.exists(tmp_dir): os.makedirs(tmp_dir)
 with open(f'{config_dir}/assets_models.yml', 'r') as file:
     assets_models_config = yaml.safe_load(file)
 
-def print_json(dict_obj: dict) -> None:
+def print_json(dict_obj: Dict) -> None:
     print(json.dumps(dict_obj, indent=2, default=str))
 
-def get_model_id_by_name(asset_model_name) -> str:
+def get_model_id_by_name(asset_model_name: str) -> str:
     with open(f'{tmp_dir}/asset_models.csv', 'r') as f:
         models = csv.DictReader(f)
         for model in models:
@@ -35,7 +36,7 @@ def get_model_id_by_name(asset_model_name) -> str:
             if model['asset_model_name'] == asset_model_name:
                 return model['asset_model_id']
 
-def get_asset_id_by_name(asset_name) -> str:
+def get_asset_id_by_name(asset_name: str) -> str:
     with open(f'{tmp_dir}/assets.csv', 'r') as f:
         assets = csv.DictReader(f)
         for asset in assets:
@@ -43,7 +44,7 @@ def get_asset_id_by_name(asset_name) -> str:
             if asset['asset_name'] == asset_name:
                 return asset['asset_id']
 
-def get_hierarchy_id(asset_model_name, child_asset_model_id) -> str:
+def get_hierarchy_id(asset_model_name: str, child_asset_model_id: str) -> str:
     with open(f'{tmp_dir}/hierarchies.csv', 'r') as f:
         hierarchies = csv.DictReader(f)
         for hierarchy in hierarchies:
@@ -51,7 +52,7 @@ def get_hierarchy_id(asset_model_name, child_asset_model_id) -> str:
             if hierarchy['asset_model_name'] == asset_model_name and hierarchy['child_asset_model_id'] == child_asset_model_id: 
                 return hierarchy['hierarchy_id']
             
-def create_asset_model(model: dict) -> str:
+def create_asset_model(model: Dict) -> str:
     model_name = model["name"]
     properties_schema = []
     # file name -> sample_stamping_press_properties.json for the model: Sample_Stamping Press
@@ -69,7 +70,7 @@ def create_asset_model(model: dict) -> str:
     print(f"\tCreated name: {model_name}, id: {asset_model_id}")
     return asset_model_id
 
-def update_asset_model(model: dict) -> None:
+def update_asset_model(model: Dict) -> None:
     model_name = model["name"]
     model_id = get_model_id_by_name(model_name)
     #child_model_name = model["child"]
@@ -102,7 +103,7 @@ def get_asset_model_status(asset_model_id: str) -> str:
     )
     return response["assetModelStatus"]["state"]
 
-def create_asset_models(asset_models: list[dict]) -> None:
+def create_asset_models(asset_models: List[Dict]) -> None:
     f = open(f'{tmp_dir}/asset_models.csv', 'w')
     writer = csv.writer(f)
     writer.writerow(['asset_model_name', 'asset_model_id'])
@@ -120,14 +121,14 @@ def create_asset_models(asset_models: list[dict]) -> None:
         writer.writerow([model_name, asset_model_id])
     f.close()
 
-def get_asset_model_hierarchies(model_id: str) -> list[dict]:
+def get_asset_model_hierarchies(model_id: str) -> List[Dict]:
     response = client.describe_asset_model(
     assetModelId=model_id,
     excludeProperties=True
     )
     return response["assetModelHierarchies"]
 
-def update_asset_models(asset_models: list[dict]) -> None:
+def update_asset_models(asset_models: List[Dict]) -> None:
     f = open(f'{tmp_dir}/hierarchies.csv', 'w')
     writer = csv.writer(f)
     writer.writerow(['asset_model_name', 'child_asset_model_id', 'hierarchy_id'])
@@ -149,7 +150,7 @@ def update_asset_models(asset_models: list[dict]) -> None:
             time.sleep(1)
     f.close()
 
-def create_assets(assets: list[dict]) -> None:
+def create_assets(assets: List[Dict]) -> None:
     f = open(f'{tmp_dir}/assets.csv', 'w')
     writer = csv.writer(f)
     writer.writerow(['asset_name', 'asset_id'])
@@ -167,7 +168,7 @@ def create_assets(assets: list[dict]) -> None:
         writer.writerow([asset_name, asset_id])
     f.close()
 
-def create_asset(asset: dict) -> str:
+def create_asset(asset: Dict) -> str:
     asset_name = asset["name"]
     model_name = asset["model"]
     model_id = get_model_id_by_name(model_name)
@@ -185,7 +186,7 @@ def get_asset_status(asset_id: str) -> str:
     )
     return response["assetStatus"]["state"]
 
-def associate_assets(assets: list[dict]) -> None:
+def associate_assets(assets: List[Dict]) -> None:
     for asset in assets:
         asset_id = get_asset_id_by_name(asset["name"])
         model_name = asset["model"]

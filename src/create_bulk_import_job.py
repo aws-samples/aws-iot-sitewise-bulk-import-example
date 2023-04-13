@@ -1,11 +1,12 @@
 # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 # SPDX-License-Identifier: MIT-0
 
-import yaml
 import os
-import boto3
 from datetime import datetime
 import time
+from typing import List, Dict
+import boto3
+import yaml
 
 PROFILE_NAME = 'default'
 boto3.setup_default_session(profile_name=PROFILE_NAME)
@@ -23,7 +24,7 @@ with open(f'{config_dir}/bulk_import.yml', 'r') as file:
 
 job_ids = []
 
-def get_s3_keys():
+def get_s3_keys() -> List[str]:
     response = s3_client.list_objects_v2(Bucket=bulk_import_config["data"]["bucket"], Prefix=bulk_import_config["data"]["prefix"])
     s3_keys = []
     if response["ResponseMetadata"]["HTTPStatusCode"] == 200:
@@ -31,7 +32,7 @@ def get_s3_keys():
         s3_keys = [record["Key"] for record in content_records]
     return s3_keys
 
-def create_job(s3_key):
+def create_job(s3_key: str) -> Dict:
     response = client.create_bulk_import_job(
         jobName= f'job_{str(int(datetime.now().timestamp()))}',
         jobRoleArn=bulk_import_config["job"]["role_arn"],
@@ -55,7 +56,7 @@ def create_job(s3_key):
     )
     return response
 
-def create_jobs():
+def create_jobs() -> None:
     s3_keys = get_s3_keys()
     print(f'Total S3 objects: {len(s3_keys)}')
     if len(s3_keys) > 0: 
@@ -69,19 +70,26 @@ def create_jobs():
         job_ids.append(job_id)
         time.sleep(1)
 
-def list_bulk_import_jobs():
-    response = client.list_bulk_import_jobs(
-        maxResults=100
-    )
-    return response
+def list_bulk_import_jobs() -> List[Dict]:
+    all_jobs = []
+    response = client.list_bulk_import_jobs(maxResults=250)
+    all_jobs = response["jobSummaries"]
+    while True:
+        # If there are more jobs, get the next page of results
+        if 'nextToken' in response:
+            response = client.list_bulk_import_jobs(nextToken=response['nextToken'])
+            all_jobs = all_jobs + response["jobSummaries"]
+        else:
+            break  # No more jobs, exit the loop
+    return all_jobs
 
-def job_status(job_id) -> str:
+def job_status(job_id: str) -> str:
     status = None
-    for job in list_bulk_import_jobs()["jobSummaries"]:
+    for job in list_bulk_import_jobs():
         if job['id'] == job_id: status = job["status"] 
     return status
 
-def check_job_status():
+def check_job_status() -> None:
     SLEEP_SECS = 5
     active_job_ids = job_ids.copy()
     print(f'Checking job status every {SLEEP_SECS} secs until completion..')

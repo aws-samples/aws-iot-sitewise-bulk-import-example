@@ -1,10 +1,10 @@
 # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 # SPDX-License-Identifier: MIT-0
 
-import yaml
 import os
-import boto3
 import glob
+import boto3
+import yaml
 
 PROFILE_NAME = 'default'
 boto3.setup_default_session(profile_name=PROFILE_NAME)

@@ -6,6 +6,7 @@ import json
 import csv
 import yaml
 import os
+from typing import List, Dict
 import boto3
 import glob
 
@@ -22,7 +23,7 @@ tmp_dir = f'{root_dir}/tmp'
 with open(f'{config_dir}/assets_models.yml', 'r') as file:
     assets_models_config = yaml.safe_load(file)
 
-def print_json(dict_obj: dict) -> None:
+def print_json(dict_obj: Dict) -> None:
     print(json.dumps(dict_obj, indent=2, default=str))
 
 def get_model_id_by_name(asset_model_name) -> str:
@@ -55,7 +56,7 @@ def get_asset_model_status(asset_model_id: str) -> str:
     )
     return response["assetModelStatus"]["state"]
 
-def disassociate_assets(assets: list[dict]) -> None:
+def disassociate_assets(assets: List[Dict]) -> None:
     for asset in assets:
         asset_id = get_asset_id_by_name(asset["name"])
         model_name = asset["model"]
@@ -69,14 +70,14 @@ def disassociate_assets(assets: list[dict]) -> None:
                 child_asset_id = get_asset_id_by_name(child_asset_name)
                 client.disassociate_assets(assetId=asset_id, hierarchyId=hierarchy_id, childAssetId=child_asset_id)
 
-def delete_assets(assets: list[dict]) -> None:
+def delete_assets(assets: List[Dict]) -> None:
     for asset in assets:
         asset_name = asset["name"]
         asset_id = get_asset_id_by_name(asset_name)
         client.delete_asset(assetId=asset_id)
     time.sleep(5)
 
-def remove_hierarchies(asset_models: list[dict]) -> None:
+def remove_hierarchies(asset_models: List[Dict]) -> None:
     for model in asset_models:
         model_name = model["name"]
         model_id = get_model_id_by_name(model_name)
@@ -87,7 +88,7 @@ def remove_hierarchies(asset_models: list[dict]) -> None:
                 break
             time.sleep(1)
 
-def delete_asset_models(asset_models: list[dict]) -> None:
+def delete_asset_models(asset_models: List[Dict]) -> None:
     for model in asset_models:
         model_name = model["name"]
         model_id = get_model_id_by_name(model_name)
