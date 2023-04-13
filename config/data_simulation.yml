@@ -11,5 +11,5 @@ properties:
 
 # Configure historical date range
 date_range:
-  from: '2022-10-01'
+  from: '2022-11-01'
   to: '2022-12-31'

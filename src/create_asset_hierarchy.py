@@ -8,7 +8,7 @@ import yaml
 import os
 import boto3
 
-PROFILE_NAME = 'bulkimport'
+PROFILE_NAME = 'default'
 boto3.setup_default_session(profile_name=PROFILE_NAME)
 client = boto3.client('iotsitewise')
 dir = os.path.abspath(os.path.dirname(__file__))

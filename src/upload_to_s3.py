@@ -6,7 +6,7 @@ import os
 import boto3
 import glob
 
-PROFILE_NAME = 'bulkimport'
+PROFILE_NAME = 'default'
 boto3.setup_default_session(profile_name=PROFILE_NAME)
 s3_client = boto3.client('s3')
 

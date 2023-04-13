@@ -7,7 +7,7 @@ import boto3
 from datetime import datetime
 import time
 
-PROFILE_NAME = 'bulkimport'
+PROFILE_NAME = 'default'
 boto3.setup_default_session(profile_name=PROFILE_NAME)
 client = boto3.client('iotsitewise')
 s3_client = boto3.client('s3')

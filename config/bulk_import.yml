@@ -3,7 +3,7 @@ job:
   role_arn: 'arn:aws:iam::525990660317:role/SiteWiseBulkImportRole'
   error_bucket: 'sitewise-bulk-import-data-ff'
   error_prefix: 'errors/'
-  rows_per_job: 200000
+  rows_per_job: 20000
 data:
   bucket: 'sitewise-bulk-import-data-ff'
   prefix: 'data/'
