@@ -93,7 +93,7 @@ Run `simulate_historical_data.py` to generate simulated historical data for the 
 
 Sample output:
 
-    Generating simulated data between 2022-12-01 and 2022-12-31..
+    Generating simulated data between 2022-11-01 and 2022-12-31..
         historical_data_1.csv file created
         historical_data_2.csv file created
         historical_data_3.csv file created
