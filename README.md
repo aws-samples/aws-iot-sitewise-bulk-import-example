@@ -49,7 +49,7 @@ Sample output for hierarchy definitions:
 Sample output for asset creation:
 
      Creating assets..
-        Created name: Sample_Octank Motor, id: 33bfa3c1-2e62-4791-a502-0cca2f32af75
+        Created name: AnyCompany_Manufacturing, id: 33bfa3c1-2e62-4791-a502-0cca2f32af75
                 status: ACTIVE
         Created name: Sample_Arlington, id: 22938200-731b-456a-85ce-d22b9c8afa1d
                 status: ACTIVE
