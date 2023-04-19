@@ -17,7 +17,7 @@ asset_models:
 
 # Configure assets
 assets:
-  - name: 'AnyCompany_Manufacturing'
+  - name: 'AnyCompany_Motor'
     model: 'Sample_Enterprise'
     associated_assets:
     - 'Sample_Arlington'
