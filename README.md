@@ -1,7 +1,7 @@
 # AWS IoT SiteWise Bulk Import Example
 
 ## About this Repo
-This repo provides code samples to test the IoT SiteWise BulkImportJob API. Using this repo, you can easily create a sample asset hiearchy for an automobile manufacturer, simulate historical data for a selected period of time, and then import the data into AWS IoT SiteWise.
+This repo provides code samples to test the AWS IoT SiteWise BulkImportJob API. Using this repo, you can easily create a sample asset hiearchy for an automobile manufacturer, simulate historical data for a selected period of time, and then import the data into AWS IoT SiteWise.
 
 ## Pre-requisities
 1. An active AWS account
@@ -20,7 +20,7 @@ Review and update the configuration in the following files, under the `/config` 
 
 `bulk_import.yml` - job and history details
 
-`stamping_press_properties.json` - model properties schema for IoT SiteWise
+`stamping_press_properties.json` - model properties schema
 
 ### 2) Create a sample asset hierarchy
 
@@ -109,12 +109,12 @@ Sample output.
     Uploading historical data files into Amazon S3..
     Successfully uploaded historical data to S3!
 
-### 5) Create a job to import data into IoT SiteWise
+### 5) Create a job to import data into AWS IoT SiteWise
 
 > **Note**
 > Ensure that the cold tier storage is activated for AWS IoT SiteWise.
 
-Run `create_bulk_import_job.py` to import the historical data from the S3 bucket into IoT SiteWise as per the configuration in `bulk_import.yml`
+Run `create_bulk_import_job.py` to import the historical data from the S3 bucket into AWS IoT SiteWise as per the configuration in `bulk_import.yml`
 
 Sample output.
 
