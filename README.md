@@ -111,6 +111,9 @@ Sample output.
 
 ### 5) Create a job to import data into IoT SiteWise
 
+> **Note**
+> Ensure that the cold tier storage is activated for AWS IoT SiteWise.
+
 Run `create_bulk_import_job.py` to import the historical data from the S3 bucket into IoT SiteWise as per the configuration in `bulk_import.yml`
 
 Sample output.
