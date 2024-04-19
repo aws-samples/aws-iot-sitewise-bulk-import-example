@@ -1,29 +1,21 @@
 [
     {
+        "externalId": "External_Id_Pressure",
         "name": "pressure",
         "dataType": "DOUBLE",
         "unit": "kPa",
         "type": {
             "measurement": {
-                "processingConfig": {
-                    "forwardingConfig": {
-                        "state": "ENABLED"
-                    }
-                }
             }
         }
     },
     {
+        "externalId": "External_Id_Temperature",
         "name": "temperature",
         "dataType": "DOUBLE",
         "unit": "Fahrenheit",
         "type": {
             "measurement": {
-                "processingConfig": {
-                    "forwardingConfig": {
-                        "state": "ENABLED"
-                    }
-                }
             }
         }
     }

@@ -58,7 +58,11 @@ def get_asset_model_status(asset_model_id: str) -> str:
 
 def disassociate_assets(assets: List[Dict]) -> None:
     for asset in assets:
-        asset_id = get_asset_id_by_name(asset["name"])
+        try:
+            asset_id = get_asset_id_by_name(asset["name"])
+        except FileNotFoundError:
+            print("\tAsset not found! proceeding..")
+            continue 
         model_name = asset["model"]
         associated_assets = asset["associated_assets"]
         # Create associations
@@ -73,7 +77,11 @@ def disassociate_assets(assets: List[Dict]) -> None:
 def delete_assets(assets: List[Dict]) -> None:
     for asset in assets:
         asset_name = asset["name"]
-        asset_id = get_asset_id_by_name(asset_name)
+        try:
+            asset_id = get_asset_id_by_name(asset["name"])
+        except FileNotFoundError:
+            print("\tAsset not found! proceeding..")
+            continue 
         client.delete_asset(assetId=asset_id)
     time.sleep(5)
 
@@ -102,16 +110,16 @@ def cleanup_filesystem():
     for f in tmp_files: os.remove(f)
 
 def delete_asset_hierarchy() -> None:
-    print('Removing asset associations..')
+    print('\nRemoving asset associations..')
     disassociate_assets(assets_models_config["assets"])
     print('All assets updated!')
-    print('Deleting assets..')
+    print('\nDeleting assets..')
     delete_assets(assets_models_config["assets"])
     print('All assets deleted!')
-    print('Removing hierarchy definitions from models..')
+    print('\nRemoving hierarchy definitions from models..')
     remove_hierarchies(assets_models_config["asset_models"])
     print('All hierarchy definitions removed!')
-    print('Deleting asset models..')
+    print('\nDeleting asset models..')
     delete_asset_models(assets_models_config["asset_models"])
     print('All asset models deleted!')
 
