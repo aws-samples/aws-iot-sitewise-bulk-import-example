@@ -9,8 +9,9 @@ from typing import List, Dict
 import boto3
 import yaml
 
-PROFILE_NAME = 'default'
-boto3.setup_default_session(profile_name=PROFILE_NAME)
+#PROFILE_NAME = 'default'
+#boto3.setup_default_session(profile_name=PROFILE_NAME)
+
 client = boto3.client('iotsitewise')
 dir = os.path.abspath(os.path.dirname(__file__))
 root_dir = os.path.abspath(os.path.dirname(dir))
@@ -89,11 +90,21 @@ def update_asset_model(model: Dict) -> None:
         for child_model_name in child_model_names:
             child_model_id = get_model_id_by_name(child_model_name)
             model_hierarchies.append({'name':child_model_name,'childAssetModelId':child_model_id})
+    
+    transformed_properties_schema = []
+    
+    for property in properties_schema:
+        # Create a copy of the original property
+        transformed_property = property.copy()
+        # Add the new 'id' field based on externalId
+        transformed_property['id'] = f"externalId:{property['externalId']}"
+        transformed_properties_schema.append(transformed_property)
+    
     # Update model
     client.update_asset_model(
         assetModelId=model_id,
         assetModelName=model_name,
-        assetModelProperties=properties_schema,
+        assetModelProperties=transformed_properties_schema,
         assetModelHierarchies=model_hierarchies
     )
 

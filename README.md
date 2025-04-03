@@ -6,8 +6,8 @@ This repo provides code samples to test the AWS IoT SiteWise BulkImportJob API. 
 ## Pre-requisities
 1. An active AWS account
 2. Supported region for AWS IoT SiteWise
-3. Active cold tier storage (*Settings* -> *Storage*)
-   - Map `S3 bucket location` to a temporary S3 bucket which can be deleted later
+3. Active cold or warm tier storage (refer to [Configure storage](https://docs.aws.amazon.com/iot-sitewise/latest/userguide/configure-storage.html))
+   - For cold tier, map `S3 bucket location` to a temporary S3 bucket which can be deleted later
 4. IAM user with administrator access to Amazon S3 and AWS IoT SiteWise
 
 ## How to use
@@ -132,7 +132,7 @@ Sample output.
     Script execution successfully completed!!
 
 ## Clean up
-Run `clean_up.py` to remove the following resources created for the sample
+Run `clean_up_asset_hierarchy.py` to remove the following resources created for the sample
 1. Asset associations
 2. Assets
 3. Hierarchy definitions from asset models
