@@ -1,11 +1,11 @@
 # Configure import job
 job:
-  role_arn: 'arn:aws:iam::XXXXXXXXXXXX:role/SiteWiseBulkImportRole'
-  error_bucket: 'sitewise-bulk-import-data-ff'
+  role_arn: <YOUR_ROLE_ARN>
+  error_bucket: <YOUR_ERROR_BUCKET_NAME>
   error_prefix: 'errors/'
-  rows_per_job: 20000
+  rows_per_job: 100000
 data:
-  bucket: 'sitewise-bulk-import-data-ff'
+  bucket: <YOUR_DATA_BUCKET_NAME>
   prefix: 'data/'
   column_names:
   - ASSET_ID
